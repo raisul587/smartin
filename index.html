@@ -253,52 +253,83 @@
         setInterval(() => updateImage(1), 5000);
 
         function openCamera() {
-            // Check if the browser supports the camera API
-            if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
-                navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-                    .then(function(stream) {
-                        // Create a video element to show the camera feed
-                        const video = document.createElement('video');
-                        video.srcObject = stream;
-                        video.style.position = 'fixed';
-                        video.style.top = '0';
-                        video.style.left = '0';
-                        video.style.width = '100%';
-                        video.style.height = '100%';
-                        video.style.zIndex = '9999';
-                        video.style.objectFit = 'cover';
-                        
-                        // Add a close button
-                        const closeBtn = document.createElement('button');
-                        closeBtn.innerHTML = '×';
-                        closeBtn.style.position = 'fixed';
-                        closeBtn.style.top = '20px';
-                        closeBtn.style.right = '20px';
-                        closeBtn.style.zIndex = '10000';
-                        closeBtn.style.background = '#4B0082';
-                        closeBtn.style.color = 'white';
-                        closeBtn.style.border = 'none';
-                        closeBtn.style.borderRadius = '50%';
-                        closeBtn.style.width = '40px';
-                        closeBtn.style.height = '40px';
-                        closeBtn.style.fontSize = '24px';
-                        closeBtn.style.cursor = 'pointer';
-                        
-                        closeBtn.onclick = function() {
-                            stream.getTracks().forEach(track => track.stop());
-                            video.remove();
-                            closeBtn.remove();
-                        };
-                        
-                        document.body.appendChild(video);
-                        document.body.appendChild(closeBtn);
-                        video.play();
-                    })
-                    .catch(function(error) {
-                        alert('Unable to access camera: ' + error.message);
-                    });
+            // Try to open native camera app
+            const ua = navigator.userAgent.toLowerCase();
+            let deepLink = '';
+            
+            if (ua.indexOf('android') > -1) {
+                // For Android
+                deepLink = 'intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end';
+            } else if (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1) {
+                // For iOS
+                deepLink = 'photos-redirect://';
+            }
+
+            if (deepLink) {
+                // Try to open native camera
+                window.location.href = deepLink;
+                
+                // Show fallback message after a short delay
+                setTimeout(() => {
+                    const message = document.createElement('div');
+                    message.style.position = 'fixed';
+                    message.style.top = '50%';
+                    message.style.left = '50%';
+                    message.style.transform = 'translate(-50%, -50%)';
+                    message.style.background = 'rgba(255, 255, 255, 0.95)';
+                    message.style.padding = '20px';
+                    message.style.borderRadius = '10px';
+                    message.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+                    message.style.zIndex = '10000';
+                    message.style.maxWidth = '300px';
+                    message.style.textAlign = 'center';
+                    
+                    message.innerHTML = `
+                        <h3 style="color: #4B0082; margin-top: 0;">QR Code Scanning</h3>
+                        <p style="margin: 10px 0;">Please use your device's camera app to scan the QR code.</p>
+                        <button onclick="this.parentElement.remove()" style="
+                            background: #4B0082;
+                            color: white;
+                            border: none;
+                            padding: 8px 16px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            margin-top: 10px;
+                        ">Close</button>
+                    `;
+                    
+                    document.body.appendChild(message);
+                }, 1000);
             } else {
-                alert('Your browser does not support camera access');
+                // Show direct message for unsupported devices
+                const message = document.createElement('div');
+                message.style.position = 'fixed';
+                message.style.top = '50%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.background = 'rgba(255, 255, 255, 0.95)';
+                message.style.padding = '20px';
+                message.style.borderRadius = '10px';
+                message.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+                message.style.zIndex = '10000';
+                message.style.maxWidth = '300px';
+                message.style.textAlign = 'center';
+                
+                message.innerHTML = `
+                    <h3 style="color: #4B0082; margin-top: 0;">QR Code Scanning</h3>
+                    <p style="margin: 10px 0;">Please use your device's camera app to scan the QR code.</p>
+                    <button onclick="this.parentElement.remove()" style="
+                        background: #4B0082;
+                        color: white;
+                        border: none;
+                        padding: 8px 16px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        margin-top: 10px;
+                    ">Close</button>
+                `;
+                
+                document.body.appendChild(message);
             }
         }
     </script>
