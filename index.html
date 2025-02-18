@@ -63,38 +63,6 @@
             max-width: 80%;
         }
 
-        .developer-banner {
-            width: 100%;
-            overflow: hidden;
-            margin-bottom: 0.3rem;
-            white-space: nowrap;
-        }
-
-        .developer-text {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            animation: moveText 15s linear infinite;
-            color: #4B0082;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .developer-text img {
-            height: 30px;
-            width: auto;
-            vertical-align: middle;
-        }
-
-        @keyframes moveText {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
         .qr-button, .manual-button {
             background-color: #4B0082;
             color: white;
@@ -324,11 +292,6 @@
 </head>
 <body>
     <div class="content">
-        <div class="developer-banner">
-            <div class="developer-text">
-                Developed By DDN
-            </div>
-        </div>
         <div class="logo-container">
             <img src="images/saint_martin.png" alt="Logo" class="logo">
             <p class="slogan">Seamless Hospitality, Effortless Connection</p>
@@ -350,8 +313,12 @@
             <img src="images/sm1.png" alt="Hotel Saint Martin" class="slide-image">
         </div>
         <div class="developer-credit">
-            Developed By <img src="images/ddn.png" alt="DDN Logo">
+            Developed By 
+            <a href="https://brain-machine.com" target="_blank">
+                <img src="images/ddn.png" alt="DDN Logo">
+            </a>
         </div>
+        
     </div>
 
     <div class="modal" id="credentialsModal">
