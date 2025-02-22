@@ -310,7 +310,33 @@
       }
 
       .slide-container {
-        margin-bottom: 30px; /* Make space for developer credit */
+        margin-top: 1rem;  /* Add space above slide container */
+        margin-bottom: 30px; /* Space for developer credit */
+      }
+
+      .manual-button {
+        margin-bottom: 0.5rem; /* Add space below the button */
+      }
+
+      /* Adjust other spacings for mobile */
+      .content {
+        gap: 0.7rem;
+      }
+
+      .logo-container {
+        margin-bottom: 0.3rem;
+      }
+    }
+
+    /* Additional media query for very small heights */
+    @media screen and (max-height: 600px) {
+      .slide-container {
+        margin-top: 1.2rem;
+        max-height: 150px; /* Reduce height for very small screens */
+      }
+
+      .slide-image {
+        height: 150px;
       }
     }
   </style>
