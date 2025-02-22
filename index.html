@@ -281,8 +281,8 @@
     }
 
     .developer-credit {
-      margin-top: 0.5rem;
-      padding-top: 0.5rem;
+      margin-top: auto;
+      padding: 1rem 0 0.5rem 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -290,11 +290,28 @@
       color: #4B0082;
       font-size: 12px;
       opacity: 0.8;
+      border-top: 1px solid rgba(75, 0, 130, 0.1);
     }
 
     .developer-credit img {
       height: 20px;
       width: auto;
+    }
+
+    /* Media query for mobile devices */
+    @media screen and (max-height: 700px) {
+      .developer-credit {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+        padding: 0.5rem 0;
+        border-top: none;
+      }
+
+      .slide-container {
+        margin-bottom: 30px; /* Make space for developer credit */
+      }
     }
   </style>
 </head>
