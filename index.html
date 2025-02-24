@@ -77,7 +77,7 @@
       margin-bottom: 5px;
     }
 
-    .qr-button, .manual-button {
+    .manual-button {
       background-color: #4B0082;
       color: white;
       border: none;
@@ -96,39 +96,9 @@
       text-decoration: none;
     }
 
-    .qr-button:hover, .manual-button:hover {
+    .manual-button:hover {
       background-color: #6a1b9a;
       transform: translateY(-2px);
-    }
-
-    .qr-button i {
-      font-size: 20px;
-    }
-
-    .or-text {
-      color: #4B0082;
-      font-weight: bold;
-      margin: 5px 0;
-      position: relative;
-      text-align: center;
-    }
-
-    .or-text::before,
-    .or-text::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 45%;
-      height: 1px;
-      background-color: rgba(75, 0, 130, 0.3);
-    }
-
-    .or-text::before {
-      left: 0;
-    }
-
-    .or-text::after {
-      right: 0;
     }
 
     .modal {
@@ -384,14 +354,9 @@
       <p class="slogan">Seamless Hospitality, Seamless Connection</p>
     </div>
     <h2 class="connect-text">Connect Hotspot</h2>
-    <a href="https://laksa19.github.io/myqr" class="qr-button">
-      <i class="fas fa-qrcode"></i>
-      Scan QR
-    </a>
-    <div class="or-text">Or</div>
     <button class="manual-button" onclick="showCredentials()">
       <i class="fas fa-key"></i>
-      Connect Manually
+      Get Password
     </button>
     <div class="slide-container">
       <div class="navigation-arrows">
