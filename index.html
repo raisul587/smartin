@@ -403,7 +403,7 @@
       <p class="slogan">Seamless Hospitality, Seamless Connection</p>
     </div>
     <h2 class="connect-text">Connect Hotspot</h2>
-    <a href="https://raisul587.github.io/mikrotik/" class="qr-button" target="_blank" rel="noopener noreferrer">
+    <a href="qr_scanner.html" class="qr-button" target="_blank" rel="noopener noreferrer">
     <i class="fas fa-qrcode"></i>
     Scan QR
     </a>
@@ -437,10 +437,6 @@
     <div class="modal-content">
       <h3 style="color: #4B0082; margin-top: 0;">Connection Details</h3>
       <div class="credential-item">
-        <div class="credential-label">Name</div>
-        <div class="credential-value">Microtic</div>
-      </div>
-      <div class="credential-item">
         <div class="credential-label">Password</div>
         <div class="credential-value">1234</div>
       </div>
@@ -473,7 +469,7 @@
     nextButton.addEventListener('click', () => updateImage(1));
 
     // Auto-advance slides every 5 seconds
-    setInterval(() => updateImage(1), 5000);
+    setInterval(() => updateImage(1), 3000);
 
     function showCredentials() {
       document.getElementById('credentialsModal').style.display = 'flex';
