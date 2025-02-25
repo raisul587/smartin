@@ -33,14 +33,32 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       width: 90%;
       max-width: 300px;
-      /* Force the content box to fit on screen */
-      height: 90%;               /* Adjust as needed (e.g. 80%, 95%, etc.) */
+      min-height: 90%;
+      max-height: 90%;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.3);
+      overflow-y: auto;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 100px; /* Space for footer content */
+    }
+
+    .footer-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.5rem 1.5rem;
+      border-radius: 0 0 15px 15px;
     }
 
     .logo-container {
@@ -194,8 +212,8 @@
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      flex: 1;          /* Allow it to grow/shrink */
-      max-height: 200px; /* Keep images from blowing up too large */
+      height: 200px;
+      margin-bottom: 0;
     }
 
     .slide-image {
@@ -281,8 +299,7 @@
     }
 
     .developer-credit {
-      margin-top: auto;
-      padding: 1rem 0 0.5rem 0;
+      padding: 0.5rem 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -328,108 +345,100 @@
       opacity: 0.9;
       line-height: 1.4;
       text-align: center;
-      padding-top: 0.5rem;
+      padding: 0.5rem 0;
       border-top: 1px solid rgba(75, 0, 130, 0.1);
     }
 
     /* Media query for mobile devices */
     @media screen and (max-height: 700px) {
-      .developer-credit {
-        position: absolute;
-        bottom: 5px;
-        bottom: 35px;
-        left: 0;
-        right: 0;
-        padding: 0.5rem 0;
-        border-top: none;
+      .content {
+        min-height: 95%;
+        max-height: 95%;
+      }
+
+      .main-content {
+        gap: 0.7rem;
+        margin-bottom: 90px;
       }
 
       .slide-container {
-        margin-top: 1rem;
-        margin-bottom: 30px;
+        width: 90%;
+        margin: 0.5rem auto;
+        height: 180px;
       }
 
-      .manual-button {
-        margin-bottom: 0.5rem;
+      .footer-content {
+        padding: 0.3rem 1.5rem;
+      }
+
+      .developer-credit {
+        padding: 0.4rem 0;
       }
 
       .copyright-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
         padding: 0.3rem 0;
         font-size: 10px;
-        border-top: none;
-      }
-
-      .content {
-        gap: 0.7rem;
-      }
-
-      .logo-container {
-        margin-bottom: 0.3rem;
       }
     }
 
     @media screen and (max-height: 600px) {
-      .welcome-text {
-        margin-bottom: 0.3rem;
+      .content {
+        min-height: 98%;
+        max-height: 98%;
       }
 
-      .welcome-text span {
-        font-size: 12px;
+      .main-content {
+        margin-bottom: 85px;
       }
 
       .slide-container {
-        margin-top: 1.2rem;
-        max-height: 150px;
-        margin-bottom: 80px;
-      }
-
-      .slide-image {
-        height: 150px;
+        width: 85%;
+        height: 160px;
       }
     }
   </style>
 </head>
 <body>
   <div class="content">
-    <div class="welcome-text">
-      <span>Welcome to DDN Internet</span>
-    </div>
-    <div class="logo-container">
-      <img src="images/saint_martin.png" alt="Logo" class="logo">
-      <p class="slogan">Seamless Hospitality, Seamless Connection</p>
-    </div>
-    <h2 class="connect-text">Connect Hotspot</h2>
-    <a href="https://raisul587.github.io/mikrotik/" class="qr-button" target="_blank" rel="noopener noreferrer">
-    <i class="fas fa-qrcode"></i>
-    Scan QR
-    </a>
-    <div class="or-text">Or</div>
-    <button class="manual-button" onclick="showCredentials()">
-      <i class="fas fa-key"></i>
-      Get Password
-    </button>
-    <div class="slide-container">
-      <div class="navigation-arrows">
-        <button class="arrow">←</button>
-        <button class="arrow">→</button>
+    <div class="main-content">
+      <div class="welcome-text">
+        <span>Welcome to DDN Internet</span>
       </div>
-      <img src="images/sm1.png" alt="Hotel Saint Martin" class="slide-image">
-    </div>
-    <div class="developer-credit">
-      Developed By
-      <a href="https://brain-machine.com" target="_blank">
-        <img src="images/ddn.png" alt="DDN Logo">
+      <div class="logo-container">
+        <img src="images/saint_martin.png" alt="Logo" class="logo">
+        <p class="slogan">Seamless Hospitality, Seamless Connection</p>
+      </div>
+      <h2 class="connect-text">Connect Hotspot</h2>
+      <a href="https://raisul587.github.io/mikrotik/" class="qr-button" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-qrcode"></i>
+        Scan QR
       </a>
+      <div class="or-text">Or</div>
+      <button class="manual-button" onclick="showCredentials()">
+        <i class="fas fa-key"></i>
+        Get Password
+      </button>
+      <div class="slide-container">
+        <div class="navigation-arrows">
+          <button class="arrow">←</button>
+          <button class="arrow">→</button>
+        </div>
+        <img src="images/sm1.png" alt="Hotel Saint Martin" class="slide-image">
+      </div>
     </div>
-    <div class="copyright-info">
-      Copyright ©2025 Powered By DDN.<br>
-      Contact with us Hotline: 09606-393939<br>
-      Digital Dot Net<br>
-      An Internet Service Provider.
+    <div class="footer-content">
+      <div class="developer-credit">
+        Developed By
+        <a href="https://brain-machine.com" target="_blank">
+          <img src="images/ddn.png" alt="DDN Logo">
+        </a>
+      </div>
+      <div class="copyright-info">
+        Copyright ©2025 Powered By DDN.<br>
+        Contact with us Hotline: 09606-393939<br>
+        Digital Dot Net<br>
+        An Internet Service Provider.
+      </div>
     </div>
   </div>
 
