@@ -25,7 +25,7 @@ The core of the attendance system is its face recognition capability, powered by
 
 To enhance surveillance capabilities, the system incorporates a lightweight yet powerful object detection model.
 
-1.  **YOLOv8 Integration**: The **YOLOv8-Nano** model (`yolo12n.pt`) is used for real-time person detection. It is optimized for high-speed inference on CPU.
+1.  **YOLOv12 Integration**: The **YOLO 12-Nano** model (`yolo12n.pt`) is used for real-time person detection. It is optimized for high-speed inference on CPU.
 2.  **Targeted Detection**: The model is configured to detect only the 'person' class, ignoring other objects to reduce computational overhead.
 3.  **Automated Cropping and Saving**: When one or more persons are detected, the system isolates each individual by cropping the high-resolution, unprocessed frame using their bounding box coordinates. Each cropped image is saved to a structured directory: `Person Image/YYYY-MM-DD/HH-MM-SS_person_N.jpg`. This ensures a clean, focused image is stored for archival or review.
 
@@ -54,38 +54,33 @@ The system's architecture is designed for modularity and flexibility, supporting
 
 ```mermaid
 graph TD
-    A[Start Application] --> B{Choose Mode};
-    B --> C[GUI Mode (main.py)];
-    B --> D[CLI/Headless Mode (main_headless.py)];
+    A["Start Application"] --> B{"Choose Mode"}
+    B --> C["GUI Mode - main.py"] & D["CLI/Headless Mode - main_headless.py"]
+    C --> C1["Initialize Tkinter GUI"]
+    C1 --> C2["User Interactively Draws Attendance Line"]
+    C2 --> E["Start Camera & Processing Loop"]
+    D -- "First-Time Setup" --> D1["Run coordinate_finder.py"]
+    D1 --> D2["User Clicks on Frame to Select Line Points"]
+    D2 --> D3["Coordinates Saved to File"]
+    D -- Normal Operation --> D4["Load Hardcoded Line Coordinates"]
+    D4 --> E
+    E --> F{"Frame Processing Pipeline"}
+    F --> G["Yolo12n"]
+    G --> G1{"Person Detected?"}
+    G1 -- Yes --> G2["Crop & Save Person Image"]
+    G2 --> H@{ label: "<div style=\"color:\"><span style=\"color:\">Face Recognition - ArcFace</span></div>" }
+    G1 -- No --> H
+    H --> H1{"Face Recognized?"}
+    H1 -- Yes --> I["Track Face Trajectory"]
+    I --> I1{"Crossed Line?"}
+    I1 -- Yes --> I2["Log Attendance to CSV"]
+    I2 --> J["Display Annotated Frame"]
+    I1 -- No --> J
+    H1 -- No --> J
+    J --> E
 
-    C --> C1[Initialize Tkinter GUI];
-    C1 --> C2[User Interactively Draws Attendance Line];
-    C2 --> E[Start Camera & Processing Loop];
-
-    D -- First-Time Setup --> D1[Run coordinate_finder.py];
-    D1 --> D2[User Clicks on Frame to Select Line Points];
-    D2 --> D3[Coordinates Saved to File];
-    D -- Normal Operation --> D4[Load Hardcoded Line Coordinates];
-    D4 --> E;
-
-    E --> F{Frame Processing Pipeline};
-    F --> G[1. Person Detection (YOLOv8)];
-    G --> G1{Person Detected?};
-    G1 -- Yes --> G2[Crop & Save Person Image];
-    G2 --> H;
-    G1 -- No --> H;
-
-    H[2. Face Recognition (ArcFace)];
-    H --> H1{Face Recognized?};
-    H1 -- Yes --> I[Track Face Trajectory];
-    I --> I1{Crossed Line?};
-    I1 -- Yes --> I2[Log Attendance to CSV];
-    I2 --> J;
-    I1 -- No --> J;
-    H1 -- No --> J;
-
-    J[Display Annotated Frame];
-    J --> E;
+    H@{ shape: rect}
+    style H color:#000000
 ```
 
 ### 3.3. Operating Modes
