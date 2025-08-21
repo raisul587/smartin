@@ -70,11 +70,14 @@ object-counter/
 
 ### Unified Data Flow (Webcam • Video • Image)
 
-<p align="center">
-  <img src="static/img/unified_data_flow.svg" alt="Unified Data Flow — Webcam, Video, Image" width="100%" />
-</p>
+![Unified Data Flow — Webcam, Video, Image](./static/img/unified_data_flow.svg)
 
-> Note: This embedded SVG ensures the diagram renders in environments without Mermaid support.
+<img src="./static/img/unified_data_flow.svg?raw=1" alt="Unified Data Flow — Webcam, Video, Image" style="max-width:100%;" />
+
+If it still doesn't render on GitHub:
+- Ensure the file exists at `./static/img/unified_data_flow.svg` in the same branch.
+- View the raw file directly: `./static/img/unified_data_flow.svg`.
+- If your viewer blocks SVGs, I can add a PNG fallback.
 
 ---
 
