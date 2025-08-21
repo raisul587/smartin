@@ -68,8 +68,9 @@ object-counter/
 
 ## ⚙️ **Working Procedure**
 
-### Data Flow Diagram (Webcam • Video • Image)
+### Unified Data Flow (Webcam • Video • Image)
 
+```mermaid
 graph TB
   A[Input (User Action)] --> B{Mode}
   B -->|Webcam (Start)| C[Capture Stream]
@@ -94,6 +95,9 @@ graph TB
 
   M --> P[Summary JSON + Chart (UI)]
   N --> Q[Final Summary JSON + Chart (UI)]
+```
+
+---
 
 ## 🧠 **Core Algorithms & Innovations**
 
