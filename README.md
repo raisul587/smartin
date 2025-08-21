@@ -69,32 +69,12 @@ object-counter/
 ## ⚙️ **Working Procedure**
 
 ### Unified Data Flow (Webcam • Video • Image)
-```mermaid
-flowchart TB
-  A[Input (User Action)] --> B{Mode}
-  B -->|Webcam (Start)| C[Capture Stream]
-  B -->|Video (Upload)| D[Read/Decode Frames]
-  B -->|Image (Upload)| E[Read Image]
 
-  C --> F[Optional Resize (≤ 640px)]
-  D --> F
-  E --> F
+<p align="center">
+  <img src="static/img/unified_data_flow.svg" alt="Unified Data Flow — Webcam, Video, Image" width="100%" />
+</p>
 
-  F --> G[YOLOv12 Inference (per frame)]
-  G --> H[Annotate (boxes + labels)]
-
-  H --> I{Output}
-  I -->|Webcam| J[Stream (MJPEG)]
-  I -->|Video| K[Stream (MJPEG)]
-  I -->|Image| L[Static Image]
-
-  J --> M[On Close → Session Summary (Peak Counts)]
-  K --> N[During Stream → Peak Count Tracking]
-  L --> O[Instant Display + Chart]
-
-  M --> P[Summary JSON + Chart (UI)]
-  N --> Q[Final Summary JSON + Chart (UI)]
-```
+> Note: This embedded SVG ensures the diagram renders in environments without Mermaid support.
 
 ---
 
