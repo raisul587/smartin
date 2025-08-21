@@ -70,14 +70,13 @@ object-counter/
 
 ### Data Flow Diagram (Webcam • Video • Image)
 
-```mermaid
-flowchart TB
+graph TB
   A[Input (User Action)] --> B{Mode}
   B -->|Webcam (Start)| C[Capture Stream]
   B -->|Video (Upload)| D[Read/Decode Frames]
   B -->|Image (Upload)| E[Read Image]
 
-  C --> F[Optional Resize (≤ 640px)]
+  C --> F[Optional Resize (<= 640px)]
   D --> F
   E --> F
 
@@ -89,14 +88,12 @@ flowchart TB
   I -->|Video| K[Stream (MJPEG)]
   I -->|Image| L[Static Image]
 
-  J --> M[On Close → Session Summary (Peak Counts)]
-  K --> N[During Stream → Peak Count Tracking]
+  J --> M[On Close -> Session Summary (Peak Counts)]
+  K --> N[During Stream -> Peak Count Tracking]
   L --> O[Instant Display + Chart]
 
   M --> P[Summary JSON + Chart (UI)]
   N --> Q[Final Summary JSON + Chart (UI)]
-
----
 
 ## 🧠 **Core Algorithms & Innovations**
 
