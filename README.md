@@ -70,41 +70,39 @@ object-counter/
 
 ### Unified Data Flow (Webcam • Video • Image)
 
-```
-                    📥 Input (User Action)
-                            │
-                    ┌───────┼───────┐
-                    │       │       │
-               🎥 Webcam  📹 Video  📷 Image
-               (Start)    (Upload)  (Upload)
-                    │       │       │
-                    └───────┼───────┘
-                            │
-                   📐 Optional Resize (≤ 640px)
-                            │
-                   🧠 YOLOv12 Inference (per frame)
-                            │
-                   🏷️ Annotate (boxes + labels)
-                            │
-                    ┌───────┼───────┐
-                    │       │       │
-               📡 Webcam   📡 Video   🖼️ Image
-               Stream      Stream     Display
-               (MJPEG)     (MJPEG)    (Static)
-                    │       │       │
-        On Close → 📊      │       📊 Instant
-        Session Summary    │       Display +
-        (Peak Counts)      │       Chart
-                    │      │       │
-                    │   📈 Peak    │
-                    │   Count      │
-                    │   Tracking   │
-                    │      │       │
-                    ▼      ▼       ▼
-              📋 Summary  📋 Final  📋 Chart
-              JSON +     Summary   Display
-              Chart      JSON +    (UI)
-              (UI)       Chart
+```mermaid
+flowchart TD
+    A[User Input] --> B{Select Mode}
+    B -->|Webcam| C[Start Webcam Stream]
+    B -->|Video| D[Upload Video File]
+    B -->|Image| E[Upload Image File]
+    
+    C --> F[Capture Frames]
+    D --> G[Read Video Frames]
+    E --> H[Load Image]
+    
+    F --> I[Resize if needed]
+    G --> I
+    H --> I
+    
+    I --> J[YOLO Inference]
+    J --> K[Add Annotations]
+    
+    K --> L{Output Type}
+    L -->|Webcam| M[Live MJPEG Stream]
+    L -->|Video| N[Processed Video Stream]
+    L -->|Image| O[Annotated Static Image]
+    
+    M --> P[User Stops Stream]
+    N --> Q[Track Peak Counts]
+    O --> R[Display Results]
+    
+    P --> S[Generate Session Summary]
+    Q --> T[Save Final Summary]
+    R --> U[Show Chart]
+    
+    S --> V[Show Summary & Chart]
+    T --> W[Show Summary & Chart]
 ```
 
 ---
